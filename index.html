@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing Benfords Law for Random Number Generator</title>
+    <style>
+        input,
+        label {
+            margin: .4rem 0;
+        }
+        label {
+            font: 1rem 'Fira Sans', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div>
+            <label for="minValue">Min value:</label>
+            <input type="text" value="0" id="minValue">
+            <br/>
+
+            <label for="maxValue">Max value:</label>
+            <input label="text" value="1000" id="maxValue">
+
+            <br/>
+            <input type="button" value="Analyze" onclick="analyzeDistrubtion()"></button>
+        </div>
+
+        <h2>Output chart</h2>
+        <canvas id="distributionChart" width="100" height="100"></canvas>
+    </div>
+<script src="processing.js"></script>
+</body>
+
+</html>

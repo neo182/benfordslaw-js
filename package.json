@@ -1,0 +1,17 @@
+{
+  "name": "benfordslaw-js",
+  "version": "1.0.0",
+  "description": "Just a simple project to use Belfords Law for image processing",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server -a localhost -p 8080",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Satyam Twanabasu",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "http-server": "^0.12.3"
+  }
+}
