@@ -21,19 +21,19 @@
 <body>
     <div>
         <div>
-            <label for="minValue">Min value:</label>
-            <input type="text" value="0" id="minValue">
-            <br/>
-
-            <label for="maxValue">Max value:</label>
-            <input label="text" value="1000" id="maxValue">
+            <h1>Analyse pixel distribution of an image</h1>
+            <label for="imageInput" >Choose Image: </label>
+            <input type="file" accept="image/*" id="imageInput" />
 
             <br/>
-            <input type="button" value="Analyze" onclick="analyzeDistrubtion()"></button>
+            <input id="btnAnalyse" type="button" value="Analyse Image" onclick="analyseImage()"></input>
+
+            <br>
+            <canvas id="imageCanvas" width="0" height="0"></canvas>
         </div>
 
         <h2>Output chart</h2>
-        <canvas id="distributionChart" width="100" height="100"></canvas>
+        <canvas id="chartCanvas" width="100" height="100"></canvas>
     </div>
 <script src="processing.js"></script>
 </body>

@@ -1,7 +1,7 @@
 {
   "name": "benfordslaw-js",
   "version": "1.0.0",
-  "description": "Just a simple project to use Belfords Law for image processing",
+  "description": "Just a simple project to use Benfords Law for image processing",
   "main": "index.js",
   "scripts": {
     "start": "http-server -a localhost -p 8080",
