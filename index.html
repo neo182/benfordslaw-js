@@ -21,19 +21,20 @@
 <body>
     <div>
         <div>
-            <label for="minValue">Min value:</label>
+            <h2>Analysing distribution of the first digit of random numbers</h2>
+            <label for="minValue">Min number:</label>
             <input type="text" value="0" id="minValue">
             <br/>
 
-            <label for="maxValue">Max value:</label>
-            <input label="text" value="1000" id="maxValue">
+            <label for="maxValue">Max number:</label>
+            <input type="text" value="1000" id="maxValue">
 
             <br/>
-            <input type="button" value="Analyze" onclick="analyzeDistrubtion()"></button>
+            <input type="button" value="Analyse" onclick="analyseDistribution()"></input>
         </div>
 
         <h2>Output chart</h2>
-        <canvas id="distributionChart" width="100" height="100"></canvas>
+        <canvas id="chartCanvas" width="100" height="100"></canvas>
     </div>
 <script src="processing.js"></script>
 </body>

@@ -1,18 +1,23 @@
-function analyzeDistrubtion() {
+function analyseDistribution() {
     var min = document.getElementById("minValue").value;
     var max = document.getElementById("maxValue").value;
 
-    var digitCount = new Array(10).fill(0);
-    for (var i = min; i <= max; i++) {
-        var firstDigit = getRandomArbitrary(min, max).toString().substr(0, 1);
-        digitCount[firstDigit] = digitCount[firstDigit] + 1;
+    if (min < 0 || max <= 0 || isNaN(min) || isNaN(max)) {
+        alert("Invalid value(s) entered for min/max numbers!");
+        return;
     }
 
-    digitCount.splice(0,1);
-    plotChart(digitCount);
+    var digitOccArray = new Array(10).fill(0);
+    for (var i = min; i <= max; i++) {
+        var firstDigit = getRandomArbitrary(min, max).toString().substr(0, 1);
+        digitOccArray[firstDigit] = digitOccArray[firstDigit] + 1;
+    }
+
+    digitOccArray.splice(0,1);
+    plotChart(digitOccArray);
     var count = 1;
-    digitCount.filter(i => i > 0)
-        .forEach(i => console.log("Digit : " + (count++) + " Count : " + i));
+    digitOccArray.filter(i => i > 0)
+        .forEach(i => console.log("Digit : " + (count++) + ", Count : " + i));
 }
 
 function getRandomArbitrary(min, max) {
@@ -20,7 +25,7 @@ function getRandomArbitrary(min, max) {
 }
 
 function plotChart(data) {
-    var ctx = document.getElementById('distributionChart');
+    var ctx = document.getElementById("chartCanvas");
     new Chart(ctx, {
         type: 'bar',
         data: {
