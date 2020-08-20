@@ -14,10 +14,9 @@ const ctx = imageCanvas.getContext('2d')
 const srcImage = new Image
 
 srcImage.onload = function () {
-  var aspectRatio = 0.50;
-  imageCanvas.width = srcImage.width * aspectRatio
-  imageCanvas.height = srcImage.height * aspectRatio
-  ctx.drawImage(srcImage, 0, 0, srcImage.width * aspectRatio, srcImage.height * aspectRatio)
+  imageCanvas.width = srcImage.width 
+  imageCanvas.height = srcImage.height
+  ctx.drawImage(srcImage, 0, 0, srcImage.width, srcImage.height)
   
   document.getElementById("btnAnalyse").disabled = false;
 }
@@ -35,53 +34,50 @@ function analyseImage() {
         var alpha = pix[i + 3];
 
         var rgba = (red << 24) + (green << 16) + (blue << 8) + (alpha);
-        var firstDigit = rgba.toString().substr(0, 1)
+        var firstDigit = rgba.toString().substr(0, 1);
         
-        digitOccArray[firstDigit] = digitOccArray[firstDigit] + 1;
+        digitOccArray[firstDigit] += 1;
     }
 
     //removing the first element of array ie digitOccArray[0] which is useless
-    digitOccArray.splice(0,1)
-    var counterTotalSize = digitOccArray.reduce((a, b) => a + b, 0)
+    digitOccArray.splice(0,1);
+    var counterTotalSize = digitOccArray.reduce((a, b) => a + b, 0);
+    console.log("totalSize : " + counterTotalSize);
     
     var index = 1;
     digitOccArray
         .forEach(digitCount => console.log("Digit : " + (index++) + ", Percentage : " + (digitCount.toFixed(4)/counterTotalSize.toFixed(4)) * 100));
     
-    plotChart(digitOccArray)
+    var benfordsLawDist = [0, 30.1, 17.6, 12.5, 9.7, 7.9, 6.7, 5.8, 5.1, 4.6];
+    benfordsLawDist.splice(0,1);
+    benfordsLawDist = benfordsLawDist
+        .map(dist => dist.toPrecision(4) * 0.01 * counterTotalSize.toFixed(4))
+        .map(n => Math.round(n));
+
+    benfordsLawDist
+        .forEach(n => console.log("BenfordsDist  : " + n));
+
+    plotChart(digitOccArray, benfordsLawDist);
 }
 
-function plotChart(data) {
+function plotChart(data, benfordsLawDist) {
     var ctx = document.getElementById('chartCanvas');
     new Chart(ctx, {
         type: 'bar',
         data: {
             labels: ['# of 1', '# of 2', '# of 3', '# of 4', '# of 5', '# of 6', '# of 7', '# of 8', '# of 9'],
             datasets: [{
-                label: '# of first digit occurances',
+                label: '# of first digit occurances (Benfords Law)',
+                data: benfordsLawDist,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            },
+            {
+                label: '# of first digit occurances (Given Imge)',
                 data: data,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)'
-                ],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
                 borderWidth: 1
             }]
         },
